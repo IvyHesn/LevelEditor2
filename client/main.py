@@ -15,7 +15,7 @@ while 1:
     for eachkey in level_ele:
         for i in range(0, len(level_ele[eachkey])):
             if level_ele[eachkey][i] != None:
-                print (Index_to_GridXY(i))
+                #print (Index_to_GridXY(i))
                 screen.blit(getPic(level_ele[eachkey][i]), Index_to_GridXY(i))
     # pygame.display.flip()
     for event in pygame.event.get():
