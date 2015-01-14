@@ -2,6 +2,7 @@ import re
 import codecs
 import sys
 from xml.etree.ElementTree import ElementTree, Element
+from config import *
 
 
 def read_xml(in_path):
@@ -49,15 +50,24 @@ def get_node_by_keyvalue(nodelist, kv_map):
             result_nodes.append(node)
     return result_nodes
 
-lp_path = './levelProperty.xml'
-lc_path = './levelsCleanUp.xml'
+#---------------change -----
+
+
+def change_node_properties(nodelist, kv_map, is_delete=False):
+    '''修改/增加 /删除 节点的属性及属性值
+       nodelist: 节点列表
+       kv_map:属性及属性值map'''
+    for node in nodelist:
+        for key in kv_map:
+            if is_delete:
+                if key in node.attrib:
+                    del node.attrib[key]
+            else:
+                node.set(key, kv_map.get(key))
+
 
 tree_lp = read_xml(lp_path)
 tree_lc = read_xml(lc_path)
-
-levelId = 0
-maxLine = 9
-startLine = 0
 
 
 def getAttribList(nodePath, tree_xml=tree_lc):
@@ -126,3 +136,6 @@ def getElementByLayer(levelId):
                 value = i['id']
                 ElementByLayer['%s' % (key)][x + 9 * y] = value
     return ElementByLayer
+
+
+level_ele = getElementByLayer(0)
