@@ -20,7 +20,10 @@ bg_ele_rect = [726, 0, bg_ele.get_width(), bg_ele.get_height()]
 
 def getPic(ele, path='res/element/'):
     '''根据elementID和路径，获取ele对应的图片'''
-    pic = pygame.image.load(path + str(ele) + '.png')
+    if ele != None:
+        pic = pygame.image.load(path + str(ele) + '.png')
+    if ele == None:
+        pic = pygame.image.load(path + '999' + '.png')
     return pic
 
 
@@ -52,8 +55,10 @@ def Index_to_GridXY2(i):
     '''根据index获取格子的坐标'''
     gridX = i % 9 * 65 + bg_board_rect[0]
     gridY = i // 9 * 65 + bg_board_rect[1]
-    return gridX, gridY    
+    return gridX, gridY
+
+
 def Index_to_GridXY3(i):
-    gridX = i % 9 * 65 + bg_ele_rect[0]
-    gridY = i // 9 * 65 + bg_ele_rect[1]       
+    gridX = i % 13 * 65 + bg_ele_rect[0]
+    gridY = i // 13 * 65 + bg_ele_rect[1]
     return gridX, gridY
